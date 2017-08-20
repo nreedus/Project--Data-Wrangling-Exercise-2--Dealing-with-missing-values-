@@ -16,3 +16,8 @@ titanic_original$age[is.na(titanic_original$age)] <- mean(titanic_original$age, 
 ```
 titanic_original$boat[is.na(titanic_original$boat)] <- 'None'
 ```
+# 4 Create a new column has_cabin_number which has 1 if there is a cabin number, and 0 otherwise.
+```
+titanic_original <- mutate(titanic_original, has_cabin_number = ifelse(cabin == "NA", 0, 1))
+> titanic_original$has_cabin_number[is.na(titanic_original$has_cabin_number)] <- "0" 
+```
