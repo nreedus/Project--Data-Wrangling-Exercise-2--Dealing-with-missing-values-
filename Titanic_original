@@ -1,0 +1,23 @@
+# Data Wrangling Exercise 2: Dealing with Missing Values
+## Author: Narcel Reedus
+## Data: titanic_original.csv
+# 1: Port of embarkation: Find the missing values and replace them with "S"
+```
+titanic_original$embarked[is.na(titanic_original$embarked)] <- 'S'
+filter(titanic_original, is.na(embarked))
+```
+# 2: Calculate the mean of the Age column and use that value to populate the missing values
+```
+mean(titanic_original$age, na.rm = TRUE) # calculates the mean if the age column and removes missing ages from the calculation
+## [1] 29.88113
+titanic_original$age[is.na(titanic_original$age)] <- mean(titanic_original$age, na.rm = TRUE) # populates the mean into the missing age values
+```
+# 3 Fill empty boat slots with a dummy value e.g. the string 'None' or 'NA'
+```
+titanic_original$boat[is.na(titanic_original$boat)] <- 'None'
+```
+# 4 Create a new column has_cabin_number which has 1 if there is a cabin number, and 0 otherwise.
+```
+titanic_original <- mutate(titanic_original, has_cabin_number = ifelse(cabin == "NA", 0, 1))
+> titanic_original$has_cabin_number[is.na(titanic_original$has_cabin_number)] <- "0" 
+```
